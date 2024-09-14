@@ -7,12 +7,16 @@ import { Link } from 'react-router-dom'; // Assuming you're using react-router
 const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
     const [id, setId] = useState(0);
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [mob_num, setMob_num] = useState('');
     const [department, setDepartment] = useState('');
 
     useEffect(() => {
         if (data) {
             setId(data.id);
             setName(data.name);
+            setEmail(data.email);
+            setMob_num(data.mob_num);
             setDepartment(data.department || '');
         } else {
             resetForm(); // Reset form when not editing
@@ -22,11 +26,13 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
     const resetForm = () => {
         setId(0);
         setName('');
+        setEmail('');
+        setMob_num('');
         setDepartment('');
     };
 
     const handleSubmit = async () => {
-        const employee = { id, name, department };
+        const employee = { id, name, email, mob_num, department };
         try {
             if (isEdit) {
                 // Update existing employee
@@ -89,7 +95,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                             Employee ID
                         </Typography>
                         <Input
-                            type='number'
+                            type='int'
                             id='id'
                             name='id'
                             fullWidth
@@ -126,6 +132,56 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                             }}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                        />
+                    </Grid>
+
+                    {/* Employee Email Field */}
+                    <Grid item xs={12}>
+                        <Typography
+                            component={'label'}
+                            htmlFor='email'
+                            sx={{ color: '#495057', fontSize: '16px', marginBottom: '10px', display: 'block' }}
+                        >
+                            Employee Email
+                        </Typography>
+                        <Input
+                            type='text'
+                            id='email'
+                            name='email'
+                            fullWidth
+                            sx={{
+                                padding: '10px',
+                                backgroundColor: '#fff',
+                                borderRadius: '8px',
+                                boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+                            }}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Grid>
+
+                    {/* Employee Mobile Number Field */}
+                    <Grid item xs={12}>
+                        <Typography
+                            component={'label'}
+                            htmlFor='mob_num'
+                            sx={{ color: '#495057', fontSize: '16px', marginBottom: '10px', display: 'block' }}
+                        >
+                            Employee Mobile Number
+                        </Typography>
+                        <Input
+                            type='int'
+                            id='mob_num'
+                            name='mob_num'
+                            fullWidth
+                            sx={{
+                                padding: '10px',
+                                backgroundColor: '#fff',
+                                borderRadius: '8px',
+                                boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+                            }}
+                            value={mob_num}
+                            onChange={(e) => setMob_num(Number(e.target.value))}
                         />
                     </Grid>
 

@@ -10,9 +10,9 @@ const getEmployee = async (req, res) => {
 };
 
 const addEmployee = async (req, res) => {
-  const { id, name, department } = req.body;
+  const { id, name, email, mob_num, department } = req.body;
   try {
-    const newEmployee = new Employee({ id, name, department });
+    const newEmployee = new Employee({ id, name, email, mob_num, department });
     await newEmployee.save();
     res.status(201).json({ message: 'Employee added successfully.' });
   } catch (error) {
@@ -21,9 +21,9 @@ const addEmployee = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-  const { id, name, department } = req.body;
+  const { id, name, email, mob_num, department } = req.body;
   try {
-    await Employee.findOneAndUpdate({ id }, { name, department });
+    await Employee.findOneAndUpdate({ id }, { name, email, mob_num, department });
     res.json({ message: 'Employee updated successfully.' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to update employee.' });

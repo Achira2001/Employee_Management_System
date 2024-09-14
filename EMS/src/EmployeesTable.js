@@ -13,6 +13,8 @@ const EmployeesTable = ({ employees, deleteEmployee, onEdit }) => {
                     <TableRow sx={{ backgroundColor: '#007bff' }}>
                         <TableCell sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '16px' }}>Employee ID</TableCell>
                         <TableCell sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '16px' }}>Employee Name</TableCell>
+                        <TableCell sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '16px' }}>Employee Email</TableCell>
+                        <TableCell sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '16px' }}>Employee Mobile Number</TableCell>
                         <TableCell sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '16px' }}>Department</TableCell>
                         <TableCell sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '16px' }}>Actions</TableCell>
                     </TableRow>
@@ -28,6 +30,8 @@ const EmployeesTable = ({ employees, deleteEmployee, onEdit }) => {
                         >
                             <TableCell sx={{ fontSize: '14px', color: '#495057' }}>{employee.id}</TableCell>
                             <TableCell sx={{ fontSize: '14px', color: '#495057' }}>{employee.name}</TableCell>
+                            <TableCell sx={{ fontSize: '14px', color: '#495057' }}>{employee.email}</TableCell>
+                            <TableCell sx={{ fontSize: '14px', color: '#495057' }}>{employee.mob_num}</TableCell>
                             <TableCell sx={{ fontSize: '14px', color: '#495057' }}>{employee.department}</TableCell>
                             <TableCell>
                                 <IconButton aria-label="edit" onClick={() => onEdit(employee)} sx={{ color: '#007bff' }}>
