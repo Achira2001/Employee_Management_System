@@ -7,7 +7,7 @@ const dbURI = process.env.MONGO_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB Atlas');
-    const port = 5000;
+    const port = 5001;
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });
