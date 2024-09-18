@@ -1,7 +1,7 @@
 import { Grid, Input, Typography, Button, IconButton, Select, MenuItem, Paper } from '@mui/material';
-import { Home } from '@mui/icons-material'; // Import Home icon
+import { Home } from '@mui/icons-material'; 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import { Link } from 'react-router-dom'; 
 import axios from 'axios';
 
 const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
@@ -62,7 +62,7 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
                 }}
             >
                 <Grid container spacing={4}>
-                    {/* Home button positioned at the top */}
+                    {/* Home button  */}
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                         <Link to='/'>
                             <IconButton color='primary' aria-label='home'>

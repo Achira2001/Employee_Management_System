@@ -1,8 +1,8 @@
 import { Grid, Input, Typography, Button, Select, MenuItem, IconButton, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Home } from '@mui/icons-material'; // Import Home icon
-import { Link } from 'react-router-dom'; // Assuming you're using react-router
+import { Home } from '@mui/icons-material'; 
+import { Link } from 'react-router-dom'; 
 
 const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
     const [id, setId] = useState(0);
