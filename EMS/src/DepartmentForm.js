@@ -1,22 +1,24 @@
 import { Grid, Input, Typography, Button, IconButton, Select, MenuItem, Paper } from '@mui/material';
-import { Home } from '@mui/icons-material'; 
+import { Home } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; // useNavigate hook for logout
 import axios from 'axios';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
     const [d_id, setD_Id] = useState(0);
     const [d_name, setD_Name] = useState('');
     const [d_mn, setD_Mn] = useState('');
+    const navigate = useNavigate(); 
 
-    // Update form fields when editing
+    
     useEffect(() => {
         if (data) {
             setD_Id(data.d_id);
             setD_Name(data.d_name);
             setD_Mn(data.d_mn || '');
         } else {
-            resetForm(); // Clear form when not editing
+            resetForm(); 
         }
     }, [data]);
 
@@ -27,21 +29,30 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
     };
 
     const handleSubmit = async () => {
+        if (!d_name || !d_mn) {
+            alert('Please fill in all the required fields');
+            return;
+        }
+
         const department = { d_id, d_name, d_mn };
         try {
             if (isEdit) {
                 // Update existing department
                 await axios.post('http://localhost:5001/updateDepartment', department);
-                updateDepartment(department); // This triggers the update in Departments.js
+                updateDepartment(department); 
             } else {
                 // Add new department
                 await axios.post('http://localhost:5001/createDepartment', department);
-                addDepartment(); // Trigger a re-fetch in Departments.js
+                addDepartment(department); 
             }
-            resetForm(); // Clear the form after submission
+            resetForm(); 
         } catch (error) {
             console.error('Error submitting department:', error);
         }
+    };
+
+    const handleLogout = () => {
+        navigate('/'); 
     };
 
     return (
@@ -49,7 +60,7 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
             container
             justifyContent="center"
             alignItems="center"
-            sx={{ minHeight: '100vh', backgroundColor: '#f1f3f5' }} // Full page height to center the form
+            sx={{ minHeight: '100vh', backgroundColor: '#f1f3f5' }} 
         >
             <Paper
                 elevation={3}
@@ -57,18 +68,21 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
                     padding: '40px',
                     borderRadius: '15px',
                     backgroundColor: '#f8f9fa',
-                    maxWidth: '600px', // Limit the width to make it look clean on larger screens
+                    maxWidth: '600px', 
                     width: '100%',
                 }}
             >
                 <Grid container spacing={4}>
-                    {/* Home button  */}
-                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    {/* Home button and Logout */}
+                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Link to='/App'>
                             <IconButton color='primary' aria-label='home'>
                                 <Home />
                             </IconButton>
                         </Link>
+                        <IconButton color='primary' aria-label='logout' onClick={handleLogout}>
+                            <LogoutIcon />
+                        </IconButton>
                     </Grid>
 
                     <Grid item xs={12}>
@@ -80,7 +94,7 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
                         </Typography>
                     </Grid>
 
-                    {/* Department ID Field */}
+                    {/* Department ID */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
@@ -105,7 +119,7 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
                         />
                     </Grid>
 
-                    {/* Department Select Field */}
+                    {/* Select Department */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
@@ -137,7 +151,7 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
                         </Select>
                     </Grid>
 
-                    {/* Manager Name Field */}
+                    {/* Manager Name */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}

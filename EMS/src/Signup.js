@@ -30,12 +30,17 @@ const Signup = () => {
 };
 
   return (
+<>
+    <Typography sx={{ textAlign: 'center', marginTop:'100px'}} variant="h4" mb={2} color="primary">
+          Employee Management System
+    </Typography>
+
     <Box
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      minHeight="100vh"
+      minHeight="50vh"
     >
       <Box width={300} p={3} borderRadius={3} boxShadow={3} bgcolor="white">
         <Typography variant="h4" mb={2} color="primary">
@@ -92,6 +97,7 @@ const Signup = () => {
         </Typography>
       </Box>
     </Box>
+    </>
   );
 };
 

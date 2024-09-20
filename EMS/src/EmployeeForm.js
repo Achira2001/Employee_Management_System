@@ -1,8 +1,9 @@
 import { Grid, Input, Typography, Button, Select, MenuItem, IconButton, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Home } from '@mui/icons-material'; 
-import { Link } from 'react-router-dom'; 
+import { Home } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
     const [id, setId] = useState(0);
@@ -10,6 +11,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
     const [email, setEmail] = useState('');
     const [mob_num, setMob_num] = useState('');
     const [department, setDepartment] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (data) {
@@ -19,7 +21,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
             setMob_num(data.mob_num);
             setDepartment(data.department || '');
         } else {
-            resetForm(); // Reset form when not editing
+            resetForm(); 
         }
     }, [data]);
 
@@ -32,21 +34,31 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
     };
 
     const handleSubmit = async () => {
+        if (!name || !email || !mob_num || !department) {
+            alert("Please fill out all the required fields");
+            return;
+        }
+
         const employee = { id, name, email, mob_num, department };
+
         try {
             if (isEdit) {
                 // Update existing employee
                 await axios.post('http://localhost:5001/updateEmployee', employee);
-                updateEmployee(employee); // Trigger update in EmployeesTable
+                updateEmployee(employee);
             } else {
                 // Add new employee
                 await axios.post('http://localhost:5001/createEmployee', employee);
-                addEmployee(employee); // Trigger refresh in EmployeesTable
+                addEmployee(employee); 
             }
             resetForm();
         } catch (error) {
             console.error('Error submitting employee:', error);
         }
+    };
+
+    const handleLogout = () => {
+        navigate('/');
     };
 
     return (
@@ -67,13 +79,17 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                 }}
             >
                 <Grid container spacing={4}>
-                    {/* Home button positioned at the top */}
-                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    {/* Home button and logout  */}
+                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Link to='/App'>
                             <IconButton color='primary' aria-label='home'>
                                 <Home />
                             </IconButton>
                         </Link>
+
+                        <IconButton color='primary' aria-label='logout' onClick={handleLogout}>
+                                <LogoutIcon />
+                        </IconButton>
                     </Grid>
 
                     <Grid item xs={12}>
@@ -85,7 +101,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                         </Typography>
                     </Grid>
 
-                    {/* Employee ID Field */}
+                    {/* ID Field */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
@@ -95,7 +111,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                             Employee ID
                         </Typography>
                         <Input
-                            type='int'
+                            type='number'
                             id='id'
                             name='id'
                             fullWidth
@@ -110,7 +126,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                         />
                     </Grid>
 
-                    {/* Employee Name Field */}
+                    {/* Name Field */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
@@ -135,7 +151,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                         />
                     </Grid>
 
-                    {/* Employee Email Field */}
+                    {/* Email Field */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
@@ -160,7 +176,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                         />
                     </Grid>
 
-                    {/* Employee Mobile Number Field */}
+                    {/* Mobile Number */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
@@ -170,7 +186,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                             Employee Mobile Number
                         </Typography>
                         <Input
-                            type='int'
+                            type='number'
                             id='mob_num'
                             name='mob_num'
                             fullWidth
@@ -185,7 +201,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                         />
                     </Grid>
 
-                    {/* Department Select Field */}
+                    {/* Select Department */}
                     <Grid item xs={12}>
                         <Typography
                             component={'label'}
