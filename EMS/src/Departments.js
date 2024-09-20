@@ -12,7 +12,7 @@ const Departments = () => {
   // Fetch departments from backend
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/department');
+      const response = await axios.get('http://localhost:5001/department');
       setDepartments(response.data.departments);
     } catch (error) {
       console.error('Error fetching departments:', error);
@@ -40,7 +40,7 @@ const Departments = () => {
 
   const deleteDepartment = async (d_id) => {
     try {
-      await axios.post('http://localhost:5000/deleteDepartment', { d_id });
+      await axios.post('http://localhost:5001/deleteDepartment', { d_id });
       setDepartments(departments.filter((dep) => dep.d_id !== d_id));
     } catch (error) {
       console.error('Error deleting department:', error);

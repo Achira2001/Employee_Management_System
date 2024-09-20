@@ -36,11 +36,11 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
         try {
             if (isEdit) {
                 // Update existing employee
-                await axios.post('http://localhost:5000/updateEmployee', employee);
+                await axios.post('http://localhost:5001/updateEmployee', employee);
                 updateEmployee(employee); // Trigger update in EmployeesTable
             } else {
                 // Add new employee
-                await axios.post('http://localhost:5000/createEmployee', employee);
+                await axios.post('http://localhost:5001/createEmployee', employee);
                 addEmployee(employee); // Trigger refresh in EmployeesTable
             }
             resetForm();
@@ -69,7 +69,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, data, isEdit }) => {
                 <Grid container spacing={4}>
                     {/* Home button positioned at the top */}
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                        <Link to='/'>
+                        <Link to='/App'>
                             <IconButton color='primary' aria-label='home'>
                                 <Home />
                             </IconButton>

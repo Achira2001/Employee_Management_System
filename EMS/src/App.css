@@ -1,10 +1,14 @@
 .App {
   text-align: center;
+  background-image: url('/public/bg.png'); /* Use absolute path for public folder */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
-
 .App-header {
-  background-color: #282c34;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text readability */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,19 +16,19 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.employees-button{
+.employees-button {
   font-size: 18px;
   padding: 20px 40px;
   border: none;
   border-radius: 10px;
   background-color: #ffffff;
   cursor: pointer;
-
 }
 
-.container{
+.container {
   background-color: #282c34;
 }
-

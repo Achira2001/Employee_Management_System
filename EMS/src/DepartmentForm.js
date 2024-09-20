@@ -31,11 +31,11 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
         try {
             if (isEdit) {
                 // Update existing department
-                await axios.post('http://localhost:5000/updateDepartment', department);
+                await axios.post('http://localhost:5001/updateDepartment', department);
                 updateDepartment(department); // This triggers the update in Departments.js
             } else {
                 // Add new department
-                await axios.post('http://localhost:5000/createDepartment', department);
+                await axios.post('http://localhost:5001/createDepartment', department);
                 addDepartment(); // Trigger a re-fetch in Departments.js
             }
             resetForm(); // Clear the form after submission
@@ -64,7 +64,7 @@ const DepartmentForm = ({ addDepartment, updateDepartment, data, isEdit }) => {
                 <Grid container spacing={4}>
                     {/* Home button  */}
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                        <Link to='/'>
+                        <Link to='/App'>
                             <IconButton color='primary' aria-label='home'>
                                 <Home />
                             </IconButton>

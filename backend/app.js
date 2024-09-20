@@ -1,21 +1,30 @@
 const express = require('express');
-const controller1 = require('./controllers/employee');
-const controller2 = require('./controllers/department');
 const cors = require('cors');
+const employeeController = require('./controllers/employee');
+const departmentController = require('./controllers/department');
+const signupController = require('./controllers/signup');
+const loginController = require('./controllers/login');
+
 const app = express();
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/employee', controller1.getEmployee);
-app.post('/createEmployee', controller1.addEmployee);
-app.post('/updateEmployee', controller1.updateEmployee);
-app.post('/deleteEmployee', controller1.deleteEmployee);
+// Employee routes
+app.get('/employee', employeeController.getEmployee);
+app.post('/createEmployee', employeeController.addEmployee);
+app.post('/updateEmployee', employeeController.updateEmployee);
+app.post('/deleteEmployee', employeeController.deleteEmployee);
 
-app.get('/department', controller2.getDepartment);
-app.post('/createDepartment', controller2.addDepartment);
-app.post('/updateDepartment', controller2.updateDepartment);
-app.post('/deleteDepartment', controller2.deleteDepartment);
+// Department routes
+app.get('/department', departmentController.getDepartment);
+app.post('/createDepartment', departmentController.addDepartment);
+app.post('/updateDepartment', departmentController.updateDepartment);
+app.post('/deleteDepartment', departmentController.deleteDepartment);
+
+// User Authentication routes
+app.post('/signup', signupController.signup);
+app.post('/login', loginController.login);
 
 module.exports = app;

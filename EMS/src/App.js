@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css';
 
 function App() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigate
 
   return (
     <div className='App'>
