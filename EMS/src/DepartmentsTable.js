@@ -22,8 +22,8 @@ const DepartmentsTable = ({ departments, deleteDepartment, onEdit }) => {
                         <TableRow
                             key={department.d_id}
                             sx={{
-                                '&:nth-of-type(odd)': { backgroundColor: '#f1f3f5' }, // alternate row color
-                                '&:hover': { backgroundColor: '#f8f9fa' }, // hover effect on row
+                                '&:nth-of-type(odd)': { backgroundColor: '#f1f3f5' }, 
+                                '&:hover': { backgroundColor: '#f8f9fa' },
                             }}
                         >
                             <TableCell sx={{ fontSize: '14px', color: '#495057' }}>{department.d_id}</TableCell>

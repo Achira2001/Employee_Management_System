@@ -21,10 +21,10 @@ const Departments = () => {
 
   useEffect(() => {
     fetchDepartments();
-  }, [submitted]); // Re-fetch whenever `submitted` changes
+  }, [submitted]); 
 
   const addDepartment = () => {
-    setSubmitted(true); // Trigger a re-fetch after adding a department
+    setSubmitted(true); 
   };
 
   const updateDepartment = (updatedDepartment) => {
@@ -35,7 +35,7 @@ const Departments = () => {
     );
     setIsEdit(false);
     setCurrentDepartment(null);
-    setSubmitted(!submitted); // Trigger re-fetch to get the latest data
+    setSubmitted(!submitted); 
   };
 
   const deleteDepartment = async (d_id) => {
@@ -50,7 +50,7 @@ const Departments = () => {
   const onEdit = (department) => {
     setCurrentDepartment(department);
     setIsEdit(true);
-    setSubmitted(false); // Reset the submitted state
+    setSubmitted(false); 
   };
 
   return (
